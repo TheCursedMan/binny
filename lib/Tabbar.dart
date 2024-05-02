@@ -9,12 +9,12 @@ class BinnyTabBar extends StatelessWidget {
     return TabBar(
       dividerColor: null,
       indicator: BoxDecoration(
-          color: Colors.green, borderRadius: BorderRadius.circular(300)),
+          color: Color.fromRGBO(2, 194, 117, 100), borderRadius: BorderRadius.circular(300)),
       splashBorderRadius: BorderRadius.circular(300),
       indicatorSize: TabBarIndicatorSize.tab,
       labelColor: Colors.white,
       //labelStyle: TextStyle(backgroundColor: Colors.green ),
-      unselectedLabelColor: Colors.green,
+      unselectedLabelColor: Color.fromRGBO(2, 194, 117, 100),
       unselectedLabelStyle: TextStyle(backgroundColor: null),
       tabAlignment: TabAlignment.center,
       indicatorColor: Colors.green,
