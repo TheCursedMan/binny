@@ -79,7 +79,7 @@ class _MyTabBarViewState extends State<MyTabBarView> {
                         children: [
                           SizedBox(height: 12),
                           ProductItem(
-                            name: 'Product ID' + '\n' + 'Product Name',
+                            name: 'Product ID ${index}' + '\n' + 'Product Name',
                             imageAsset: 'assets/product${index+1}.png',
                           ),
                           SizedBox(height: 12),
