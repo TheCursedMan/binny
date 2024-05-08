@@ -1,4 +1,5 @@
 import 'package:binny/Tabbar.dart';
+import 'package:binny/productitem.dart';
 import 'package:flutter/material.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:flutter_automation/flutter_automation.dart';
@@ -35,11 +36,10 @@ class MyTabBarView extends StatefulWidget {
 class _MyTabBarViewState extends State<MyTabBarView> {
   String? sc_result;
   bool isScan = false;
-  void closescreen(){
+
+  void closescreen() {
     isScan = false;
-
   }
-
 
   @override
   void initState() {
@@ -49,27 +49,53 @@ class _MyTabBarViewState extends State<MyTabBarView> {
 
   @override
   Widget build(BuildContext context) {
-
+    final screenHeight = MediaQuery.of(context).size.height;
+    final topSpaceHeight = screenHeight / 6;
     return Container(
       padding: const EdgeInsets.all(16),
       child: TabBarView(
         children: [
+          Column(children: [
+            Expanded(
+                child: MobileScanner(
+                    allowDuplicates: true,
+                    onDetect: (barcode, arg) {
+                      if (!isScan) {
+                        String code = barcode.rawValue ?? '---';
+                        isScan = true;
+                        print(code);
+                      }
+                    }))
+          ]),
           Column(
             children: [
+              //SizedBox(height: topSpaceHeight),
               Expanded(
-                child: MobileScanner(
-                allowDuplicates: true,
-                onDetect: (barcode , arg){
-                  if (!isScan){
-                    String code = barcode.rawValue ?? '---';
-                    isScan = true;
-                    print(code);
+                flex: 5,
+                child: ListView.builder(
+                  itemCount: 5,
+                  itemBuilder: (context , index){
+                    return Column(
+                        children: [
+                          SizedBox(height: 12),
+                          ProductItem(
+                            name: 'Product ID' + '\n' + 'Product Name',
+                            imageAsset: 'assets/product${index+1}.png',
+                          ),
+                          SizedBox(height: 12),
+                          Divider(
+                            color: Colors.grey,
+                            height: 1,
+                            indent: 16,
+                            endIndent: 16,
+                          ),
+                    ],
+                    );
                   }
-                }
-              )
-            )]
+                  ),
+                ),
+            ],
           ),
-          Text('จะใส่ไอทีมึงทำแทนช่วงนี้'),
         ],
       ),
     );
